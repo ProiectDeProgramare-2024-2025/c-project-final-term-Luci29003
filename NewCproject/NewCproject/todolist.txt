@@ -1,0 +1,25 @@
+3
+Tasks1 03.02.2025
+3
+0
+Write journal
+0
+Read 10 pages
+0
+Clean desktop
+Tasks2 10.03.2025
+2
+0
+Buy groceries
+0
+Call mom
+Tasks3 15.03.2025
+4
+0
+Water plants
+0
+Check emails
+0
+Pay bills
+0
+Do laundry
