@@ -16,11 +16,11 @@
 
 typedef struct {
     char text[MAX_TEXT];
-    int completed; // 0 - incomplete, 1 - completed
+    int completed; 
 } Task;
 
 typedef struct {
-    char title[MAX_TEXT]; // e.g. "Tasks 01.06.2025"
+    char title[MAX_TEXT];
     Task tasks[MAX_TASKS];
     int taskCount;
 } ToDoList;
@@ -30,13 +30,11 @@ typedef struct {
     int listCount;
 } AppData;
 
-// Clear input buffer
 void clearInputBuffer() {
     int c;
     while ((c = getchar()) != '\n' && c != EOF);
 }
 
-// Save data to file
 void saveData(AppData *data) {
     FILE *f = fopen(FILE_NAME, "w");
     if (!f) {
@@ -56,11 +54,10 @@ void saveData(AppData *data) {
     fclose(f);
 }
 
-// Load data from file
 void loadData(AppData *data) {
     FILE *f = fopen(FILE_NAME, "r");
     if (!f) {
-        return; // nothing to load
+        return;
     }
 
     fscanf(f, "%d\n", &data->listCount);
@@ -79,7 +76,6 @@ void loadData(AppData *data) {
     fclose(f);
 }
 
-// Show all lists and tasks, with colors
 void showAllLists(AppData *data) {
     if (data->listCount == 0) {
         printf("%sNo lists available.%s\n", YELLOW, RESET);
@@ -99,7 +95,6 @@ void showAllLists(AppData *data) {
     }
 }
 
-// Add a new list
 void addList(AppData *data) {
     if (data->listCount >= MAX_LISTS) {
         printf("%sToo many lists!%s\n", RED, RESET);
@@ -115,7 +110,6 @@ void addList(AppData *data) {
     printf("%sList created successfully.%s\n", GREEN, RESET);
 }
 
-// Add tasks to a list (multiple tasks)
 void addTask(AppData *data) {
     if (data->listCount == 0) {
         printf("%sNo lists available. Please create one first.%s\n", YELLOW, RESET);
@@ -161,7 +155,6 @@ void addTask(AppData *data) {
     }
 }
 
-// Mark tasks as done (multiple)
 void markTaskDone(AppData *data) {
     if (data->listCount == 0) {
         printf("%sNo lists available.%s\n", YELLOW, RESET);
@@ -215,7 +208,6 @@ void markTaskDone(AppData *data) {
         token = strtok(NULL, " ");
     }
 
-    // Check if all tasks are done, then delete the list
     int allDone = 1;
     for (int i = 0; i < list->taskCount; i++) {
         if (!list->tasks[i].completed) {
@@ -236,7 +228,6 @@ void markTaskDone(AppData *data) {
 int main() {
     AppData data = {0};
 
-    // Create file if not exists
     FILE* f = fopen(FILE_NAME, "a");
     if (f) fclose(f);
 
@@ -244,7 +235,7 @@ int main() {
 
     int opt;
     do {
-        system("clear"); // clear screen on macOS/Linux
+        system("clear");
         printf("\n%s=== TO-DO MENU ===%s\n", CYAN, RESET);
         printf("1. %sCreate a list%s\n", BOLD, RESET);
         printf("2. %sAdd task to a list%s\n", BOLD, RESET);
